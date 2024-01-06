@@ -1,0 +1,44 @@
+<!-- topbar.xhtml -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <style>
+        /* styles.css */
+        #topbar {
+            background-color: #6b6b6b;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 200px;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .avatar {
+            /* Add styles for the avatar/icon */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div id="topbar">
+        <!-- Left side content (brand/logo) -->
+        <div class="brand">DataCardyFi</div>
+        
+        <!-- Right side content (avatar icon) -->
+        <div class="avatar">
+            <!-- Your avatar/icon markup goes here -->
+<!--            <img src="avatar.png" alt="Avatar" />-->
+                <h:form><h:commandButton value="Log Out" action="#{loginManagedBean.LogOut()}" /></h:form>
+        </div>
+    </div>
+</h:body>
+</html>

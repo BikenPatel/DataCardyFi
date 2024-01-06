@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        .card label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #333; /* Text color for labels */
+        }
+
+        .card input,
+        .card button {
+            display: block;
+            margin-bottom: 10px;
+            width: calc(100% - 20px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .card button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Login</h2>
+        <h:form>
+            <div>
+                <label for="email">Email:</label>
+                <h:inputText id="email" value="#{loginManagedBean.email}" />
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <h:inputSecret id="password" value="#{loginManagedBean.password}" />
+            </div>
+            <div>
+                <h:commandButton value="Login" action="#{loginManagedBean.Login()}" />
+                <h:commandButton value="Go to Quick Register" action="#{loginManagedBean.redirectToQuickRegistrationPage()}" />
+                <f:param name="bypassFilter" value="true" />
+            </div>
+        </h:form>
+    </div>
+</body>
+</html>

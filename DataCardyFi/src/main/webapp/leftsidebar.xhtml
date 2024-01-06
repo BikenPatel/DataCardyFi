@@ -1,0 +1,82 @@
+<!-- sidebar.xhtml -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <style>
+        /* styles.css */
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #6b6b6b;
+            padding-top: 20px;
+        }
+
+        .sidebar-header {
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #444;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 20px;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .menu li a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .menu li a:hover {
+            background-color: #555;
+        }
+        
+        .menu-item {
+            width: 110px;
+            background-color: #c9e7ed;
+        }
+        
+        .menu-item:hover {
+            transform: scale(1.05); 
+        }
+        
+        .menu-item.active {
+            transform: scale(1.2); 
+            background-color: #a5c3f8;
+            border-radius: 5px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            Sidebar Header
+        </div>
+        <ul class="menu">
+            <h:form>
+                <li><h:commandButton styleClass="#{leftSideBarBean.isIsDashboardActive() ? 'menu-item active' : 'menu-item'}" value="Dashboard" action="#{leftSideBarBean.redirectToDashBoard()}" /></li>
+                <li><h:commandButton styleClass="#{leftSideBarBean.isIsAIFormActive() ? 'menu-item active' : 'menu-item'}" value="AI Form" action="#{leftSideBarBean.redirectToAIForm()}" /></li>
+                <li><h:commandButton styleClass="#{leftSideBarBean.isIsManualFormActive() ? 'menu-item active' : 'menu-item'}" value="Manual Form" action="#{leftSideBarBean.redirectToManualForm()}" /></li>
+                <li><h:commandButton styleClass="#{leftSideBarBean.isIsCheckFormActive() ? 'menu-item active' : 'menu-item'}" value="Form Verifier" action="#{leftSideBarBean.redirectToCheckForm()}" /></li>
+            </h:form>
+        </ul>
+    </div>
+</h:body>
+</html>

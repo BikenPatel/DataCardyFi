@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            flex: 1;
+            padding: 20px;
+            margin-right: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart {
+            flex: 2;
+            padding: 20px;
+            background-color: #d4efee;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .table {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            flex: 1;
+            padding: 20px;
+            margin-right: 20px;
+            background-color: #ff847c; 
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <ui:include src="topbar.xhtml" />
+    <ui:include src="leftsidebar.xhtml" />
+
+    <!-- Dashboard content -->
+    <div class="dashboard">
+        <!-- First row -->
+        <div class="row">
+            <div class="card">
+                <h4>Total Colleges</h4>
+                <p>25</p>
+            </div>
+            <div class="card">
+                <h4>Total Courses</h4>
+                <p>150</p>
+            </div>
+            <div class="card">
+                <h4>Total Students</h4>
+                <p>5000</p>
+            </div>
+            <div class="card">
+                <h4>Total Teachers</h4>
+                <p>200</p>
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <div class="row">
+            <div class="chart">
+                <!-- Placeholder for chart -->
+                <h4>Statistics Bar Chart</h4>
+                <!-- Example chart using bean data (replace with actual chart) -->
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Third row -->
+        <div class="row">
+            <div class="table">
+                <h4>Top Students</h4>
+                <!-- DataTable -->
+                <h:dataTable value="#{dashboardBean.topStudents}" var="student">
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{student.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Score</f:facet>
+                        #{student.score}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        window.onload = function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['A', 'B', 'C', 'D', 'E'],
+                    datasets: [{
+                        label: 'Scores',
+                        data: [70, 85, 60, 75, 90],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false // Hide x-axis grid lines
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false // Hide x-axis grid lines
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</h:body>
+</html>

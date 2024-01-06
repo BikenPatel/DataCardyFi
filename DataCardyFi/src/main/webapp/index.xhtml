@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+    <title>Quick Registration</title>
+    <!-- Your existing HTML content -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            height: auto;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 16px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: auto;
+            padding: 6px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .btn-signin {
+            background-color: #3498db;
+        }
+        
+        #javax_faces_developmentstage_messages {
+            width: 250px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffcccc; 
+            color: #660000; 
+            border: 1px solid #cc0000; 
+            border-radius: 8px; 
+            padding: 10px; 
+            list-style: none;
+        }
+        
+        #password-info {
+            font-weight: lighter;
+            font-size: 10px;
+            color: #666;
+        }
+    </style>
+
+</h:head>
+<h:body>
+    <h:form>
+        <div class="registration-form">
+            <h3>Quick Registration</h3>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <h:inputText id="name" value="#{qRJSFManagedBean.name}" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <h:inputText id="email" value="#{qRJSFManagedBean.email}" />
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <h:inputText id="mobile" value="#{qRJSFManagedBean.mobile_number}" />
+            </div>
+            <div class="form-group">
+                <label for="college">College:</label>
+                <h:selectOneMenu id="college" value="#{qRJSFManagedBean.college}">
+                    <f:selectItem itemLabel="Select College" itemValue="" />
+                    <f:selectItems value="#{qRJSFManagedBean.GetColleges()}" var="item"
+                                   itemLabel="#{item.college}" itemValue="#{item.college}" />
+                    <f:ajax listener="#{qRJSFManagedBean.GetProgramsByCID()}" render="programDropdown" />
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <label for="college">Desired Program:</label>
+                <h:selectOneMenu id="programDropdown" value="#{qRJSFManagedBean.program}">
+                    <f:selectItem itemLabel="Select Program" itemValue="" />
+                    <f:selectItems value="#{qRJSFManagedBean.GetPrograms()}" var="item"
+                                   itemLabel="#{item.programName}" itemValue="#{item.programName}" />
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <h:inputText id="password" value="#{qRJSFManagedBean.password}" styleClass="password-field" />
+                <span id="password-info">Password must contain at least 8 characters with 1 uppercase, 1 lowercase, 1 digit, and 1 special character.</span>
+            </div>
+            <div class="form-group">
+                <label for="rpassword">Confirm Password:</label>
+                <h:inputText id="rpassword" value="#{qRJSFManagedBean.rpassword}" styleClass="password-field" />
+            </div>
+            <div class="form-group">
+                <h:commandButton id="signInBTN" value="Sign In" action="#{qRJSFManagedBean.redirectToLoginPage()}" />
+            </div>
+            <div class="form-group">
+                <h:commandButton id="AddBTN" value="Submit" action="#{qRJSFManagedBean.QuickRegister()}" />
+            </div>
+        </div>
+    </h:form>
+</h:body>
+<script>
+var passwordFields = document.querySelectorAll('.password-field');
+passwordFields.forEach(function(field) {
+    field.setAttribute('type', 'password');
+});
+</script>
+</html>

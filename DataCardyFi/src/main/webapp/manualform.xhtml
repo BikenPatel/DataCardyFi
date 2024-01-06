@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Manual Form</title>
+    <style>
+        .ManualForm {
+            margin-left: 200px;
+            margin-top: 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        .nav-item {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out; 
+            cursor: pointer;
+            background-color: #c9e7ed;
+        }
+        
+        .nav-item:hover {
+            transform: scale(1.05); 
+        }
+        
+        .nav-item.active {
+            transform: scale(1.2); 
+            background-color: #a5c3f8;
+            border-radius: 5px; 
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+        
+        /* Style for form groups */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Style for labels */
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        
+        .form-group.row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-group.row input[type="text"],
+        .form-group.row textarea {
+            width: 60%; /* Adjust this width as needed */
+        }
+        
+        .radio-container {
+            margin-right: 400px;
+        }
+        
+        .radio {
+            margin-left: 55px; /* Adjust spacing between radio buttons */
+        }
+
+        .title {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <ui:include src="topbar.xhtml" />
+    <ui:include src="leftsidebar.xhtml" />
+    <div class="ManualForm">
+        <ul class="navbar">
+            <!-- Change 'Section 1', 'Section 2', 'Section 3' to your desired labels -->
+            <li class="nav-item active" onclick="showSection(this, 'PersonalData')">Personal data</li>
+            <li class="nav-item" onclick="showSection(this, 'AcademicData')">Academic data</li>
+            <li class="nav-item" onclick="showSection(this, 'Attachments')">Attachments</li>
+        </ul>
+
+        <div id="PersonalData" class="section active">
+            <div class="title">
+            <h2>Add your Personal data</h2>
+            </div>
+            <div>
+                <f:view>
+                <h:form>
+                    <div class="form-group row">
+                        <h:outputLabel for="name">Name : </h:outputLabel>
+                        <h:inputText id="name" value="#{bean.name}" required="true" />
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="category">Category: </h:outputLabel>
+                        <h:inputText id="category" value="#{bean.category}" required="true" />
+                    </div>
+                    
+                    <div class="form-group row">
+                        <h:outputLabel for="religion">Religion: </h:outputLabel>
+                        <h:inputText id="religion" value="#{bean.religion}" required="true" />
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel>Gender: </h:outputLabel><br/>
+                        <div class="radio-container">
+                        <h:selectOneRadio value="#{bean.gender}" required="true">
+                            <f:selectItem class="radio" itemValue="male" itemLabel="Male" />
+                            <f:selectItem class="radio" itemValue="female" itemLabel="Female" />
+                        </h:selectOneRadio>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="bloodGroup">Blood Group: </h:outputLabel>
+                        <h:inputText id="bloodGroup" value="#{bean.bloodGroup}" required="true" />
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="aadharNo">Aadhar No: </h:outputLabel>
+                        <h:inputText id="aadharNo" value="#{bean.aadharNo}" required="true" />
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="address">Address: </h:outputLabel>
+                        <h:inputTextarea id="address" value="#{bean.address}" required="true" />
+                    </div>
+
+                    <!-- Additional fields in the same manner -->
+
+                    <!-- Checkbox for copying address -->
+                    <div class="form-group">
+                        <h:selectBooleanCheckbox id="copyAddress" value="#{bean.copyAddress}" />
+                        <h:outputLabel for="copyAddress">Same as current address</h:outputLabel>
+                    </div>
+
+                    <!-- Permanent address section -->
+                    <div class="form-group row">
+                        <h:outputLabel for="permanentAddress">Permanent Address: </h:outputLabel>
+                        <h:inputTextarea id="permanentAddress" value="#{bean.permanentAddress}" required="true" />
+                    </div>
+
+                    <!-- Additional fields for permanent address -->
+
+                    <div class="form-group row">
+                        <h:outputLabel for="disability">Disability: </h:outputLabel>
+                        <div class="radio-container">
+                        <h:selectOneRadio value="#{bean.disability}" required="true">
+                            <f:selectItem class="radio" itemValue="yes" itemLabel="Yes" />
+                            <f:selectItem class="radio" itemValue="no" itemLabel="No" />
+                        </h:selectOneRadio>
+                        </div>
+                    </div>
+
+                    <!-- Text input for disability -->
+                    <div class="form-group row">
+                        <h:outputLabel for="disabilityInfo">Disability Info: </h:outputLabel>
+                        <h:inputText id="disabilityInfo" value="#{bean.disabilityInfo}" disabled="#{bean.disability ne 'yes'}" />
+                    </div>
+
+                    <!-- Submit button -->
+                    <h:commandButton value="Submit" action="#{bean.submit}" />
+                </h:form>
+
+                </f:view>
+
+            </div>
+        </div>
+
+        <div id="AcademicData" class="section">
+            <!-- Content for Section 2 -->
+            <div class="title">
+            <h2>Add your Academic Data</h2>
+            </div>
+            <div>
+                <f:view>
+                    <h:form>
+                        <!-- Previous Program -->
+                        <div class="form-group row">
+                            <h:outputLabel for="previousProgram">Previous Program: </h:outputLabel>
+                            <h:inputText id="previousProgram" value="#{bean.previousProgram}" required="true" />
+                        </div>
+
+                        <!-- Qualifying University -->
+                        <div class="form-group row">
+                            <h:outputLabel for="qualifyingUniversity">Qualifying University: </h:outputLabel>
+                            <h:inputText id="qualifyingUniversity" value="#{bean.qualifyingUniversity}" required="true" />
+                        </div>
+
+                        <!-- Qualifying Board -->
+                        <div class="form-group row">
+                            <h:outputLabel for="qualifyingBoard">Qualifying Board: </h:outputLabel>
+                            <h:inputText id="qualifyingBoard" value="#{bean.qualifyingBoard}" required="true" />
+                        </div>
+
+                        <!-- Graduation Class -->
+                        <div class="form-group row">
+                            <h:outputLabel for="graduationClass">Graduation Class: </h:outputLabel>
+                            <h:inputText id="graduationClass" value="#{bean.graduationClass}" required="true" />
+                        </div>
+
+                        <!-- Last College -->
+                        <div class="form-group row">
+                            <h:outputLabel for="lastCollege">Last College: </h:outputLabel>
+                            <h:inputText id="lastCollege" value="#{bean.lastCollege}" required="true" />
+                        </div>
+
+                        <!-- Graduation Attempt -->
+                        <div class="form-group row">
+                            <h:outputLabel for="graduationAttempt">Graduation Attempt: </h:outputLabel>
+                            <h:inputText id="graduationAttempt" value="#{bean.graduationAttempt}" required="true" />
+                        </div>
+
+                        <!-- Final Year CGPA in Graduation -->
+                        <div class="form-group row">
+                            <h:outputLabel for="finalYearCGPA">Final Year CGPA in Graduation: </h:outputLabel>
+                            <h:inputText id="finalYearCGPA" value="#{bean.finalYearCGPA}" required="true" />
+                        </div>
+
+                        <!-- Total CGPA -->
+                        <div class="form-group row">
+                            <h:outputLabel for="totalCGPA">Total CGPA: </h:outputLabel>
+                            <h:inputText id="totalCGPA" value="#{bean.totalCGPA}" required="true" />
+                        </div>
+
+                        <!-- Submit button -->
+                        <h:commandButton value="Submit" action="#{bean.submit}" />
+                    </h:form>
+
+                </f:view>
+
+            </div>
+        </div>
+
+        <div id="Attachments" class="section">
+            <!-- Content for Section 3 -->
+            <div class="title"><h2>Upload Documents</h2></div>
+            <!-- Add your content here -->
+            <div>
+                <f:view>
+                    <h:form enctype="multipart/form-data">
+
+                    <!-- Passport Size Photo and Sign Section -->
+                    <div class="form-group">
+                        <h3>Passport Size Photo and Sign</h3>
+                        <!-- Passport Size Photo -->
+                        <div class="form-group row">
+                            <h:outputLabel for="passportPhoto">Passport Size Photo: </h:outputLabel>
+                            <h:inputFile id="passportPhoto" value="#{bean.passportPhoto}" required="true" />
+                        </div>
+
+                        <!-- Signature -->
+                        <div class="form-group row">
+                            <h:outputLabel for="signature">Signature: </h:outputLabel>
+                            <h:inputFile id="signature" value="#{bean.signature}" required="true" />
+                        </div>
+                    </div>
+
+                    <!-- Aadhar Card Front -->
+                    <div class="form-group row">
+                        <h:outputLabel for="aadharFront">Aadhar Card Front: </h:outputLabel>
+                        <h:inputFile id="aadharFront" value="#{bean.aadharFront}" required="true" />
+                    </div>
+
+                    <!-- Aadhar Card Rear -->
+                    <div class="form-group row">
+                        <h:outputLabel for="aadharRear">Aadhar Card Rear: </h:outputLabel>
+                        <h:inputFile id="aadharRear" value="#{bean.aadharRear}" required="true" />
+                    </div>
+
+                    <!-- 6th Semester Marksheet -->
+                    <div class="form-group row">
+                        <h:outputLabel for="sixthSemMarksheet">6th Semester Marksheet: </h:outputLabel>
+                        <h:inputFile id="sixthSemMarksheet" value="#{bean.sixthSemMarksheet}" required="true" />
+                    </div>
+
+                    <!-- 5th Semester Marksheet -->
+                    <div class="form-group row">
+                        <h:outputLabel for="fifthSemMarksheet">5th Semester Marksheet: </h:outputLabel>
+                        <h:inputFile id="fifthSemMarksheet" value="#{bean.fifthSemMarksheet}" required="true" />
+                    </div>
+
+                    <!-- Leaving Certificate -->
+                    <div class="form-group row">
+                        <h:outputLabel for="leavingCertificate">Leaving Certificate: </h:outputLabel>
+                        <h:inputFile id="leavingCertificate" value="#{bean.leavingCertificate}" required="true" />
+                    </div>
+
+                    <!-- Caste Certificate -->
+                    <div class="form-group row">
+                        <h:outputLabel for="casteCertificate">Caste Certificate: </h:outputLabel>
+                        <h:inputFile id="casteCertificate" value="#{bean.casteCertificate}" />
+                    </div>
+
+                    <!-- Non-Creamy Layer Certificate -->
+                    <div class="form-group row">
+                        <h:outputLabel for="nonCreamyLayerCertificate">Non-Creamy Layer Certificate: </h:outputLabel>
+                        <h:inputFile id="nonCreamyLayerCertificate" value="#{bean.nonCreamyLayerCertificate}" />
+                    </div>
+
+                    <!-- Submit button -->
+                    <h:commandButton value="Submit" action="#{bean.submit}" />
+                </h:form>
+
+                </f:view>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(ele, sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName("section");
+            for (var i = 0; i &lt; sections.length; i++) {
+                sections[i].classList.remove("active");
+            }
+            
+            var navs = document.getElementsByClassName("nav-item");
+            for (var i = 0; i &lt; navs.length; i++) {
+                navs[i].classList.remove("active");
+            }
+
+            ele.classList.add("active");
+            document.getElementById(sectionId).classList.add("active");
+        }
+    </script>
+</h:body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <title>Upload Images</title>
+    <style>
+        /* Professional CSS styles for the form */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            margin: 20px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ui:include src="topbar.xhtml" />
+    <ui:include src="leftsidebar.xhtml" />
+    <div class="form-container">
+        <h2>Welcome to AI Registration</h2>
+        <h4>Upload below mentioned images to fill the registration form through AI</h4>
+        
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="aadharCardFront" value="Adhar Card Front:" />
+                    <h:inputFile id="aadharCardFront" value="#{aIRegistration.aadharCardFront}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetAadharFrontString()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="adharRear" value="Adhar Card Rear:" />
+                    <h:inputFile id="adharRear" value="#{fileBean.adharRear}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetAadharRearString()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="marksheet10" value="10th Marksheet:" />
+                    <h:inputFile id="marksheet10" value="#{fileBean.marksheet10}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetMarksheet10String()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="marksheet12" value="12th Marksheet:" />
+                    <h:inputFile id="marksheet12" value="#{fileBean.marksheet12}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetMarksheet12String()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="marksheet5" value="5th Sem Marksheet:" />
+                    <h:inputFile id="marksheet5" value="#{fileBean.marksheet5}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetMarksheet5SemString()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="marksheet6" value="6th Sem Marksheet:" />
+                    <h:inputFile id="marksheet6" value="#{fileBean.marksheet6}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetMarksheet6SemString()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:outputLabel for="schoolLeavingCert" value="School Leaving Certificate:" />
+                    <h:inputFile id="schoolLeavingCert" value="#{fileBean.schoolLeavingCert}" />
+                    <h:commandButton value="Uploads" action="#{aIRegistration.GetLCString()}" />
+                </h:form>
+            </div>
+            <div class="form-group">
+                <h:form enctype="multipart/form-data">
+                    <h:commandButton value="Upload Images" action="#{fileBean.upload}" />
+                </h:form>
+            </div>
+        
+    </div>
+</body>
+</html>
